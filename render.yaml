@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: php-app
-    env: php
-    plan: free
-    buildCommand: 'composer install'
-    startCommand: 'php -S 0.0.0.0:10000 -t public'
-    branch: main
