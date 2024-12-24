@@ -16,7 +16,7 @@ def get_db_connection():
 
 @app.route('/')
 def home():
-    return "Bienvenue sur La Bibliothèque Mylène"
+    return render_template('index.html')
 
 @app.route('/search', methods=['GET'])
 def search():
