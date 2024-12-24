@@ -14,6 +14,10 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row  # Permet d'accéder aux colonnes par nom
     return conn
 
+@app.route('/')
+def home():
+    return "Bienvenue sur La Bibliothèque Mylène"
+
 @app.route('/search', methods=['GET'])
 def search():
     # Récupération du paramètre de recherche
