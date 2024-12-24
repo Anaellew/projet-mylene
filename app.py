@@ -16,8 +16,8 @@ def get_db_connection():
 
 @app.route('/')
 def home():
-    return "Bienvenue"
-    #return render_template('index.html')
+    #return "Bienvenue"
+    return render_template('index.html')
 
 @app.route('/search', methods=['GET'])
 def search():
