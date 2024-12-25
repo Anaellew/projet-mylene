@@ -28,14 +28,23 @@ while (($row = fgetcsv($file, 1000, ",")) !== FALSE) {
     $titre = SQLite3::escapeString($row[0]);
     $album = SQLite3::escapeString($row[1]);
     $annee = (int)$row[2];
-    $duree = number_format((float)$row[3], 2, '.', '');
+    $duree = SQLite3::escapeString($row[3]);
     $paroles = SQLite3::escapeString($row[4]);
     $compositeur = SQLite3::escapeString($row[5]);
     $auteur = SQLite3::escapeString($row[6]);
 
-    // Insérer les données dans la table BDD
-    $db->exec("INSERT INTO BDD (titre, album, annee, duree, paroles, compositeur, auteur) 
-               VALUES ('$titre', '$album', '$annee', '$duree', '$paroles', '$compositeur', '$auteur')");
+    // Préparer l'insertion
+    $stmt = $db->prepare("INSERT INTO BDD (titre, album, annee, duree, paroles, compositeur, auteur) 
+                          VALUES (:titre, :album, :annee, :duree, :paroles, :compositeur, :auteur)");
+    $stmt->bindValue(':titre', $titre, SQLITE3_TEXT);
+    $stmt->bindValue(':album', $album, SQLITE3_TEXT);
+    $stmt->bindValue(':annee', $annee, SQLITE3_INTEGER);
+    $stmt->bindValue(':duree', $duree, SQLITE3_TEXT);
+    $stmt->bindValue(':paroles', $paroles, SQLITE3_TEXT);
+    $stmt->bindValue(':compositeur', $compositeur, SQLITE3_TEXT);
+    $stmt->bindValue(':auteur', $auteur, SQLITE3_TEXT);
+
+    $stmt->execute();
 }
 
 // Fermer le fichier
