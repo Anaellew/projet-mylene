@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 import sqlite3
-from flask import Flask, request, jsonify
+import os
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
+
 
 app = Flask(__name__)
 CORS(app)  # Autorise les requêtes depuis d'autres domaines (CORS)
@@ -16,7 +18,8 @@ def get_db_connection():
 
 @app.route('/')
 def home():
-    #return "Bienvenue"
+    if not os.path.exists('templates/index.html'):
+        return "Fichier HTML introuvable dans le dossier 'templates'", 500
     return render_template('index.html')
 
 @app.route('/search', methods=['GET'])
@@ -63,3 +66,4 @@ def search():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
