@@ -16,7 +16,8 @@ def get_db_connection():
 
 @app.route('/')
 def home():
-    #return "Bienvenue"
+    if not os.path.exists('templates/index.html'):
+        return "Fichier HTML introuvable dans le dossier 'templates'", 500
     return render_template('index.html')
 
 @app.route('/search', methods=['GET'])
