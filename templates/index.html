@@ -17,11 +17,16 @@
         
         <p>Découvrez les albums de Mylène Farmer</p>
 
+        <!-- Formulaire de recherche -->
         <form id="searchForm">
             <input type="text" id="searchQuery" placeholder="Rechercher un mot..." required>
             <button type="submit">Rechercher</button>
         </form>
-            
+        
+        <!-- Message de résultats -->
+        <p id="resultsMessage"></p> <!-- Ajouté : message pour afficher les résultats -->
+
+        <!-- Tableau des résultats -->
         <div class="boite">
             <table id="resultsTable" class="styled-table">
                 <thead>
@@ -38,8 +43,10 @@
                 <tbody>
                     <!-- Les lignes de résultats seront ajoutées ici -->
                 </tbody>
-            </div>
-    
+            </table> <!-- Correction : fermeture du tableau -->
+        </div> <!-- Correction : fermeture correcte du div -->
+
+        <!-- Inclusion du script JS -->
         <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
     </main>

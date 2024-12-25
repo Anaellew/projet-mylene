@@ -19,13 +19,15 @@ document.getElementById('searchForm').addEventListener('submit', async function 
 
         // Vérifie si des résultats sont retournés
         if (data.results && data.results.length > 0) {
+            updateResultsMessage(`Résultats trouvés : ${data.count}`); // Affiche le nombre de résultats
             updateResultsTable(data.results); // Met à jour le tableau avec les résultats
         } else {
-            console.log("Aucun résultat trouvé");
+            updateResultsMessage("Aucun résultat trouvé"); // Affiche un message si aucun résultat
             clearResultsTable(); // Vide le tableau si aucun résultat
         }
     } catch (error) {
         console.error("Erreur lors de la requête : ", error);
+        updateResultsMessage("Une erreur est survenue lors de la recherche. Veuillez réessayer.");
     }
 });
 
@@ -58,4 +60,10 @@ function updateResultsTable(results) {
 function clearResultsTable() {
     const tbody = document.querySelector('#resultsTable tbody');
     tbody.innerHTML = ''; // Efface toutes les lignes du tableau
+}
+
+// Fonction pour afficher un message au-dessus du tableau des résultats
+function updateResultsMessage(message) {
+    const resultsMessage = document.getElementById('resultsMessage');
+    resultsMessage.textContent = message; // Met à jour le texte du message
 }
