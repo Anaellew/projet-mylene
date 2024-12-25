@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS BDD (
     titre TEXT,
     album TEXT,
     annee INTEGER,
-    duree FLOAT,
+    duree REAL,
     paroles TEXT,
     compositeur TEXT,
     auteur TEXT
@@ -28,7 +28,7 @@ while (($row = fgetcsv($file, 1000, ",")) !== FALSE) {
     $titre = SQLite3::escapeString($row[0]);
     $album = SQLite3::escapeString($row[1]);
     $annee = (int)$row[2];
-    $duree = (float)$row[3];
+    $duree = number_format((float)$row[3], 2, '.', '');
     $paroles = SQLite3::escapeString($row[4]);
     $compositeur = SQLite3::escapeString($row[5]);
     $auteur = SQLite3::escapeString($row[6]);
