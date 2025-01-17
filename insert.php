@@ -1,7 +1,6 @@
 <?php
 // Connexion à la base de données SQLite
 $db = new SQLite3('bdd.db');
-
 // Créer la table si elle n'existe pas
 $createTableQuery = "
 CREATE TABLE IF NOT EXISTS BDD (
